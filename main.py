@@ -15,6 +15,7 @@ for round_num, event in schedule['RoundNumber'].items():
     location = schedule.loc[round_num, 'Location']
     country = schedule.loc[round_num, 'Country']
     print(f"Round {round_num}: {country} - {location} - {date}")
+print("\n")
 
 # Load the latest season and round info
 season = 2024
@@ -23,7 +24,6 @@ round_number = 4  # Change this to latest round number or loop through rounds
 # Load qualifying session
 session = fastf1.get_session(season, round_number, 'Q')
 session.load()
-
 
 # Get results
 results = session.results[['FullName', 'Abbreviation', 'TeamName', 'Position', 'Q1', 'Q2', 'Q3']]
