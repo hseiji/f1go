@@ -8,7 +8,7 @@ from sklearn.metrics import mean_absolute_error
 # Enable caching for faster loading
 fastf1.Cache.enable_cache('cache')
 
-# 1. IMPORTING DATA ------------------------------------------------------------------------------
+# 1. DATA COLLECTION ------------------------------------------------------------------------------
 
 # Load season 2024
 # schedule24 = fastf1.get_event_schedule(2024)
@@ -62,6 +62,8 @@ for _, row in results.iterrows():
 q3_df = pd.DataFrame(data)
 print(f"\nQ3 DataFrame:\n{q3_df}\n")
 
+# 2. PREPROCESSING & FEATURE ENGINEERING ----------------------------------------------------------
+
 # Merging 2025 Quali with 2024 Race
 merged_df = q3_df.merge(laps_2024, left_on='Abbreviation', right_on='Driver')
 merged_df['Q3_seconds'] = pd.to_numeric(merged_df['Q3_seconds'], errors='coerce') # Convert to numeric
@@ -74,7 +76,7 @@ y = merged_df['LapTime (s)']
 print(X)
 print(y)
 
-# 2. SPLITTING DATASET ---------------------------------------------------------------------------
+# Splitting the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 
